@@ -1,5 +1,10 @@
-"""Provide Tracker class to manage main functionality
-and Record class to represent and validate
+"""This module provides the Tracker class to manage financial transactions
+and the Record class to represent and validate individual records.
+
+Example:
+    tracker = Tracker("data.csv")
+    record = Record(date="2024-05-01", category="+", amount=1000)
+    tracker.add_record(record)
 """
 
 import csv
@@ -98,15 +103,15 @@ class Tracker:
             records: Records to show.
             n: Number of last records to show.
         """
-        start = 1
-
         if not records:
             records = self._load_records()
+        start = 1
 
-        if len(records):
-            if n:
+        if records:
+            if n and n < len(records):
+                start = max(0, len(records) - n + 1)
                 records = records[-n:]
-                start = max(0, len(records) - n)
+                print('  ...')
 
             for i, rec in enumerate(records, start=start):
                 print(
@@ -153,7 +158,7 @@ class Tracker:
             and (desc is None or desc.lower() in rec.desc.lower())
         ]
         if filtered_records:
-            self.show_records(filtered_records)
+            self.show_records(records=filtered_records)
         else:
             print('Ничего не найдено.')
 

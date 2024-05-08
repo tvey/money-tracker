@@ -4,7 +4,11 @@ from .utils import texts as txt
 
 
 def parse_args() -> argparse.Namespace:
-    """Create command line argument parser."""
+    """Create command line argument parser.
+    
+    Returns:
+        A namespace object that contains parsed command-line arguments.
+    """
     parser = argparse.ArgumentParser(
         description='Финансовый трекер',
     )

@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 """Main module that initiates a tracker with a file and handles arguments."""
 
 from core.tracker import Record, Tracker
@@ -40,12 +42,15 @@ def main():
 
     elif args.command == 'search':
         tracker.search(
-            category=args.category, date=args.date, amount=args.amount
+            category=args.category,
+            date=args.date,
+            amount=args.amount,
+            desc=' '.join(args.desc),
         )
 
     elif args.command in ['list', 'show']:
         if args.tail:
-            tracker.show_records(args.tail)
+            tracker.show_records(n=args.tail)
         else:
             tracker.show_records()
 
